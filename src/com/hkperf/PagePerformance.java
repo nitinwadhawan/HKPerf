@@ -27,8 +27,11 @@ public class PagePerformance{
 
 	public static void main(String[] args) throws IOException, JSONException, InterruptedException, SQLException {
 		TestUrlPerf perf= new TestUrlPerf();
+		perf.testPerfomance("www.infibeam.com");
 		perf.testPerfomance("www.healthkart.com");
+		perf.testPerfomance("www.snapdeal.com");
 		perf.testPerfomance("www.flipkart.com");
+
 
 	}
 }

@@ -18,7 +18,7 @@ public class EnumUrl  implements java.io.Serializable {
  
     @Id
     
-    @Column(name="id", unique=true, nullable=false)
+    @Column(name="website_id", unique=true, nullable=false)
     private int id;
  
     
