@@ -13,7 +13,7 @@ public class InsertTest {
 
 		Dao dao = (Dao) factory.getBean("d");
 
-		Employee e = new Employee();
+		//Employee e = new Employee();
 		Response response= new Response();
 	}
 }

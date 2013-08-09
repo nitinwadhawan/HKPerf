@@ -2,10 +2,7 @@ package com.hkperf;
 // Generated Aug 2, 2013 12:11:08 PM by Hibernate Tools 3.2.4.CR1
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,6 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "response")
+
 public class Response implements java.io.Serializable {
 
 

@@ -19,17 +19,17 @@ public class EnumUrl  implements java.io.Serializable {
     @Id
     
     @Column(name="id", unique=true, nullable=false)
-    private Long id;
+    private int id;
  
     
     @Column(name="url", length=45)
     private String url;
    
-    public Long getId() {
+    public int getId() {
         return this.id;
     }
     
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getUrl() {
