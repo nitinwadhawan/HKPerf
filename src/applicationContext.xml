@@ -31,7 +31,7 @@
 		<property name="driverClassName"  value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/page_load_performance"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value=""></property>
+		<property name="password" value="root"></property>
 	</bean>
 	
 	<bean id="mysessionFactory"	class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">

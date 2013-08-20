@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="hkperf" default="all">
+  
+  
+  <property file="hkperf.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+
+  <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
+  <path id="jdk.classpath.1.6">
+    <fileset dir="${jdk.home.1.6}">
+      <include name="jre/lib/alt-rt.jar"/>
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.6}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.commons.classpath">
+    <pathelement location="${basedir}/lib/commons/commons-beanutils.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-codec-1.4.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-collections-3.1.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-collections-3.2.1.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-dbcp-1.4.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-email-1.1.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-fileupload-1.2.1.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-httpclient-3.0.1.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-io-1.4.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-lang-2.1.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-logging-1.1.jar"/>
+    <pathelement location="${basedir}/lib/commons/commons-pool-1.2.jar"/>
+  </path>
+  
+  <path id="library.hibernate.classpath">
+    <pathelement location="${basedir}/lib/hibernate/beanlib-hibernate-5.0.2beta.jar"/>
+    <pathelement location="${basedir}/lib/hibernate/hibernate-annotations-3.4.0.GA.jar"/>
+    <pathelement location="${basedir}/lib/hibernate/hibernate-commons-annotations-3.1.0.GA.jar"/>
+    <pathelement location="${basedir}/lib/hibernate/hibernate-core-3.3.1.GA.jar"/>
+    <pathelement location="${basedir}/lib/hibernate/hibernate-validator-4.0.2.GA.jar"/>
+    <pathelement location="${basedir}/lib/hibernate/javassist-3.9.0.GA.jar"/>
+    <pathelement location="${basedir}/lib/hibernate/javax.persistence.jar"/>
+    <pathelement location="${basedir}/lib/hibernate/scannotation-1.0.3.jar"/>
+  </path>
+  
+  <path id="library.json.classpath">
+    <pathelement location="${basedir}/lib/json/json-20070829.jar"/>
+    <pathelement location="${basedir}/lib/json/json-lib-2.3.jar"/>
+    <pathelement location="${basedir}/lib/json/json_simple-1.1.jar"/>
+  </path>
+  
+  <path id="library.logger.classpath">
+    <pathelement location="${basedir}/lib/logger/log4j-1.2.13.jar"/>
+    <pathelement location="${basedir}/lib/logger/slf4j-api-1.5.10.jar"/>
+    <pathelement location="${basedir}/lib/logger/slf4j-log4j12-1.5.10.jar"/>
+  </path>
+  
+  <path id="library.mysql.classpath">
+    <fileset dir="${basedir}/lib/mysql">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="library.rest.classpath">
+    <pathelement location="${basedir}/lib/rest/jackson-core-lgpl-1.4.2.jar"/>
+    <pathelement location="${basedir}/lib/rest/jackson-jaxrs-1.4.2.jar"/>
+    <pathelement location="${basedir}/lib/rest/jackson-mapper-lgpl-1.4.2.jar"/>
+    <pathelement location="${basedir}/lib/rest/jaxrs-api-1.1.GA.jar"/>
+    <pathelement location="${basedir}/lib/rest/jaxrs-api-2.3.0.GA.jar"/>
+    <pathelement location="${basedir}/lib/rest/resteasy-guice-2.3.0.GA.jar"/>
+    <pathelement location="${basedir}/lib/rest/resteasy-jackson-provider-1.1.GA.jar"/>
+    <pathelement location="${basedir}/lib/rest/resteasy-jaxb-provider-1.1.GA.jar"/>
+    <pathelement location="${basedir}/lib/rest/resteasy-jaxrs-1.1.GA.jar"/>
+    <pathelement location="${basedir}/lib/rest/resteasy-jaxrs-2.3.0.GA.jar"/>
+    <pathelement location="${basedir}/lib/rest/resteasy-multipart-provider-1.1.GA.jar"/>
+    <pathelement location="${basedir}/lib/rest/resteasy-spring-1.1.GA.jar"/>
+  </path>
+  
+  <path id="library.spring.classpath">
+    <pathelement location="${basedir}/lib/spring/aopalliance-1.0.jar"/>
+    <pathelement location="${basedir}/lib/spring/jta-1.1.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.aop-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.asm-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.aspects-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.beans-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.context-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.context.support-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.core-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.expression-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.instrument-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.instrument.tomcat-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.jdbc-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.jms-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.orm-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.transaction-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.web-3.0.2.RELEASE.jar"/>
+    <pathelement location="${basedir}/lib/spring/org.springframework.web.servlet-3.0.2.RELEASE.jar"/>
+  </path>
+  
+  <path id="library.thirdparty.classpath">
+    <pathelement location="${basedir}/lib/thirdParty/antlr-4.1-complete.jar"/>
+    <pathelement location="${basedir}/lib/thirdParty/dom4j-1.6.1.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${jdk.home.1.6}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm4-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <!--<taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>-->
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module HKPerf -->
+  
+  <dirname property="module.hkperf.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.hkperf" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.hkperf" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.hkperf" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.hkperf" value="${compiler.args}"/>
+  
+  <property name="hkperf.output.dir" value="${module.hkperf.basedir}/out/production/HKPerf"/>
+  <property name="hkperf.testoutput.dir" value="${module.hkperf.basedir}/out/test/HKPerf"/>
+  
+  <path id="hkperf.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="hkperf.module.production.classpath">
+    <path refid="${module.jdk.classpath.hkperf}"/>
+    <path refid="library.json.classpath"/>
+    <path refid="library.hibernate.classpath"/>
+    <path refid="library.spring.classpath"/>
+    <path refid="library.logger.classpath"/>
+    <path refid="library.commons.classpath"/>
+    <path refid="library.rest.classpath"/>
+    <path refid="library.thirdparty.classpath"/>
+    <path refid="library.mysql.classpath"/>
+  </path>
+  
+  <path id="hkperf.runtime.production.module.classpath">
+    <pathelement location="${hkperf.output.dir}"/>
+    <path refid="library.json.classpath"/>
+    <path refid="library.hibernate.classpath"/>
+    <path refid="library.spring.classpath"/>
+    <path refid="library.logger.classpath"/>
+    <path refid="library.commons.classpath"/>
+    <path refid="library.rest.classpath"/>
+    <path refid="library.thirdparty.classpath"/>
+    <path refid="library.mysql.classpath"/>
+  </path>
+  
+  <path id="hkperf.module.classpath">
+    <path refid="${module.jdk.classpath.hkperf}"/>
+    <pathelement location="${hkperf.output.dir}"/>
+    <path refid="library.json.classpath"/>
+    <path refid="library.hibernate.classpath"/>
+    <path refid="library.spring.classpath"/>
+    <path refid="library.logger.classpath"/>
+    <path refid="library.commons.classpath"/>
+    <path refid="library.rest.classpath"/>
+    <path refid="library.thirdparty.classpath"/>
+    <path refid="library.mysql.classpath"/>
+  </path>
+  
+  <path id="hkperf.runtime.module.classpath">
+    <pathelement location="${hkperf.testoutput.dir}"/>
+    <pathelement location="${hkperf.output.dir}"/>
+    <path refid="library.json.classpath"/>
+    <path refid="library.hibernate.classpath"/>
+    <path refid="library.spring.classpath"/>
+    <path refid="library.logger.classpath"/>
+    <path refid="library.commons.classpath"/>
+    <path refid="library.rest.classpath"/>
+    <path refid="library.thirdparty.classpath"/>
+    <path refid="library.mysql.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.hkperf">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.hkperf">
+    <patternset refid="excluded.from.module.hkperf"/>
+  </patternset>
+  
+  <path id="hkperf.module.sourcepath">
+    <dirset dir="${module.hkperf.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.hkperf" depends="compile.module.hkperf.production,compile.module.hkperf.tests" description="Compile module HKPerf"/>
+  
+  <target name="compile.module.hkperf.production" depends="register.custom.compilers" description="Compile module HKPerf; production classes">
+    <mkdir dir="${hkperf.output.dir}"/>
+    <javac destdir="${hkperf.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.hkperf}/javac">
+      <compilerarg line="${compiler.args.hkperf}"/>
+      <bootclasspath refid="hkperf.module.bootclasspath"/>
+      <classpath refid="hkperf.module.production.classpath"/>
+      <src refid="hkperf.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.hkperf"/>
+    </javac>
+    
+    <copy todir="${hkperf.output.dir}">
+      <fileset dir="${module.hkperf.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+
+	  <jar basedir="${hkperf.output.dir}"  destfile="${module.hkperf.basedir}/test.jar" manifest="${module.hkperf.basedir}/src/HKPerfManifest.mf"></jar>
+  </target>
+  
+  <target name="compile.module.hkperf.tests" depends="register.custom.compilers,compile.module.hkperf.production" description="compile module HKPerf; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.hkperf" description="cleanup module">
+    <delete dir="${hkperf.output.dir}"/>
+    <delete dir="${hkperf.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.hkperf" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.hkperf" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>

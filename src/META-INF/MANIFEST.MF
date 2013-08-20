@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Class-Path: mysql-connector-java-5.1.18-bin.jar commons-beanutils.jar 
+ commons-codec-1.4.jar commons-collections-3.1.jar commons-collections
+ -3.2.1.jar commons-dbcp-1.4.jar commons-email-1.1.jar commons-fileupl
+ oad-1.2.1.jar commons-httpclient-3.0.1.jar commons-io-1.4.jar commons
+ -lang-2.1.jar commons-logging-1.1.jar commons-pool-1.2.jar log4j-1.2.
+ 13.jar slf4j-api-1.5.10.jar slf4j-log4j12-1.5.10.jar antlr-4.1-comple
+ te.jar dom4j-1.6.1.jar jackson-core-lgpl-1.4.2.jar jackson-jaxrs-1.4.
+ 2.jar jackson-mapper-lgpl-1.4.2.jar jaxrs-api-1.1.GA.jar jaxrs-api-2.
+ 3.0.GA.jar resteasy-guice-2.3.0.GA.jar resteasy-jackson-provider-1.1.
+ GA.jar resteasy-jaxb-provider-1.1.GA.jar resteasy-jaxrs-1.1.GA.jar re
+ steasy-jaxrs-2.3.0.GA.jar resteasy-multipart-provider-1.1.GA.jar rest
+ easy-spring-1.1.GA.jar beanlib-hibernate-5.0.2beta.jar hibernate-anno
+ tations-3.4.0.GA.jar hibernate-commons-annotations-3.1.0.GA.jar hiber
+ nate-core-3.3.1.GA.jar hibernate-validator-4.0.2.GA.jar javassist-3.9
+ .0.GA.jar javax.persistence.jar scannotation-1.0.3.jar json-20070829.
+ jar json-lib-2.3.jar json_simple-1.1.jar aopalliance-1.0.jar jta-1.1.
+ jar org.springframework.aop-3.0.2.RELEASE.jar org.springframework.asm
+ -3.0.2.RELEASE.jar org.springframework.aspects-3.0.2.RELEASE.jar org.
+ springframework.beans-3.0.2.RELEASE.jar org.springframework.context-3
+ .0.2.RELEASE.jar org.springframework.context.support-3.0.2.RELEASE.ja
+ r org.springframework.core-3.0.2.RELEASE.jar org.springframework.expr
+ ession-3.0.2.RELEASE.jar org.springframework.instrument-3.0.2.RELEASE
+ .jar org.springframework.instrument.tomcat-3.0.2.RELEASE.jar org.spri
+ ngframework.jdbc-3.0.2.RELEASE.jar org.springframework.jms-3.0.2.RELE
+ ASE.jar org.springframework.orm-3.0.2.RELEASE.jar org.springframework
+ .transaction-3.0.2.RELEASE.jar org.springframework.web-3.0.2.RELEASE.
+ jar org.springframework.web.servlet-3.0.2.RELEASE.jar
+Main-Class: com.hkperf.PagePerformance
+

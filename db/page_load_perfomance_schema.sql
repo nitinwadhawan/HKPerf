@@ -52,7 +52,7 @@ CREATE TABLE `response` (
   `location` varchar(45) DEFAULT NULL,
   `view_type` int(10) DEFAULT '1',
   PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +125,7 @@ CREATE TABLE `response_details` (
   `titleTime` varchar(45) DEFAULT NULL,
   `visualComplete` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idresponse_details`)
-) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

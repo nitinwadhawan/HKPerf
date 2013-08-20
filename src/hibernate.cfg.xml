@@ -5,5 +5,8 @@
 <hibernate-configuration>
     <session-factory>
          <mapping class="com.hkperf.Response" />
+         <mapping class="com.hkperf.EnumUrl" />
+         <mapping class="com.hkperf.PagePerformance" />
+         <mapping class="com.hkperf.ResponseDetails" />
         </session-factory>
     </hibernate-configuration>
