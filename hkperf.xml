@@ -67,34 +67,7 @@
     <include name="**/?*.jpg"/>
   </patternset>
   
-  <!-- JDK definitions -->
 
-  <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
-  <path id="jdk.classpath.1.6">
-    <fileset dir="${jdk.home.1.6}">
-      <include name="jre/lib/alt-rt.jar"/>
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/management-agent.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/resources.jar"/>
-      <include name="jre/lib/rt.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/sunmscapi.jar"/>
-      <include name="jre/lib/ext/sunpkcs11.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="project.jdk.home" value="${jdk.home.1.6}"/>
-  <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
-  <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
-  
-  
   <!-- Project Libraries -->
   
   <path id="library.commons.classpath">
@@ -182,19 +155,8 @@
     <pathelement location="${basedir}/lib/thirdParty/dom4j-1.6.1.jar"/>
   </path>
   
-  
-  <!-- Global Libraries -->
-  <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${jdk.home.1.6}/lib"/>
-  <path id="javac2.classpath">
-    <pathelement location="${javac2.home}/javac2.jar"/>
-    <pathelement location="${javac2.home}/jdom.jar"/>
-    <pathelement location="${javac2.home}/asm4-all.jar"/>
-    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
-  </path>
+
   <target name="register.custom.compilers">
-    <!--<taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>-->
   </target>
   
   <!-- Modules -->
@@ -203,23 +165,16 @@
   <!-- Module HKPerf -->
   
   <dirname property="module.hkperf.basedir" file="${ant.file}"/>
-  
-  
-  <property name="module.jdk.home.hkperf" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.hkperf" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.hkperf" value="${project.jdk.classpath}"/>
-  
+
   <property name="compiler.args.hkperf" value="${compiler.args}"/>
   
   <property name="hkperf.output.dir" value="${module.hkperf.basedir}/out/production/HKPerf"/>
   <property name="hkperf.testoutput.dir" value="${module.hkperf.basedir}/out/test/HKPerf"/>
   
   <path id="hkperf.module.bootclasspath">
-    <!-- Paths to be included in compilation bootclasspath -->
   </path>
   
   <path id="hkperf.module.production.classpath">
-    <path refid="${module.jdk.classpath.hkperf}"/>
     <path refid="library.json.classpath"/>
     <path refid="library.hibernate.classpath"/>
     <path refid="library.spring.classpath"/>
@@ -241,20 +196,8 @@
     <path refid="library.thirdparty.classpath"/>
     <path refid="library.mysql.classpath"/>
   </path>
-  
-  <path id="hkperf.module.classpath">
-    <path refid="${module.jdk.classpath.hkperf}"/>
-    <pathelement location="${hkperf.output.dir}"/>
-    <path refid="library.json.classpath"/>
-    <path refid="library.hibernate.classpath"/>
-    <path refid="library.spring.classpath"/>
-    <path refid="library.logger.classpath"/>
-    <path refid="library.commons.classpath"/>
-    <path refid="library.rest.classpath"/>
-    <path refid="library.thirdparty.classpath"/>
-    <path refid="library.mysql.classpath"/>
-  </path>
-  
+
+
   <path id="hkperf.runtime.module.classpath">
     <pathelement location="${hkperf.testoutput.dir}"/>
     <pathelement location="${hkperf.output.dir}"/>
@@ -268,15 +211,15 @@
     <path refid="library.mysql.classpath"/>
   </path>
   
-  
+
   <patternset id="excluded.from.module.hkperf">
     <patternset refid="ignored.files"/>
   </patternset>
-  
+
   <patternset id="excluded.from.compilation.hkperf">
     <patternset refid="excluded.from.module.hkperf"/>
   </patternset>
-  
+
   <path id="hkperf.module.sourcepath">
     <dirset dir="${module.hkperf.basedir}">
       <include name="src"/>
@@ -288,7 +231,7 @@
   
   <target name="compile.module.hkperf.production" depends="register.custom.compilers" description="Compile module HKPerf; production classes">
     <mkdir dir="${hkperf.output.dir}"/>
-    <javac destdir="${hkperf.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.hkperf}/javac">
+    <javac destdir="${hkperf.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" >
       <compilerarg line="${compiler.args.hkperf}"/>
       <bootclasspath refid="hkperf.module.bootclasspath"/>
       <classpath refid="hkperf.module.production.classpath"/>
@@ -303,7 +246,7 @@
       </fileset>
     </copy>
 
-	  <jar basedir="${hkperf.output.dir}"  destfile="${module.hkperf.basedir}/test.jar" manifest="${module.hkperf.basedir}/src/HKPerfManifest.mf"></jar>
+	  <jar basedir="${hkperf.output.dir}"  destfile="${module.hkperf.basedir}/out/artifacts/HKPerf_jar/HKPerf.jar" manifest="${module.hkperf.basedir}/src/META-INF/MANIFEST.MF"></jar>
   </target>
   
   <target name="compile.module.hkperf.tests" depends="register.custom.compilers,compile.module.hkperf.production" description="compile module HKPerf; test classes" unless="skip.tests"/>
