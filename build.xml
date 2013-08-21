@@ -3,6 +3,8 @@
   
   
   <property file="build.properties"/>
+  <property file="config.properties"/>
+
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
   <property name="skip.tests" value="true"/>
@@ -320,6 +322,10 @@
 				<include name="*.jar"/>
 			</fileset>
 		</copy>
+
+        <replace file="./src/applicationContext.xml" token="dbuser" value="${dbuser}"/>
+        <replace file="./src/applicationContext.xml" token="dbpass" value="${dbpassword}"/>
+        <replace file="./src/applicationContext.xml" token="dburl" value="${dburl}"/>
 
 		<jar basedir="${hkperf.output.dir}" destfile="${module.hkperf.basedir}/out/artifacts/HKPerf_jar/HKPerf.jar"
 		     manifest="${module.hkperf.basedir}/src/META-INF/MANIFEST.MF"></jar>

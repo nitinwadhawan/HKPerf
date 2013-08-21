@@ -9,4 +9,5 @@
          <mapping class="com.hkperf.PagePerformance" />
          <mapping class="com.hkperf.ResponseDetails" />
         </session-factory>
+
     </hibernate-configuration>
