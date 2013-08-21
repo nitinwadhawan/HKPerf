@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -19,7 +18,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,8 +33,8 @@ public class TestUrlPerf {
 	Response response = new Response();
 	ResponseDetails responseDetails = new ResponseDetails();
 	ResponseViewType responseType = new ResponseViewType();
-	Resource r = new ClassPathResource("applicationContext.xml");
-	BeanFactory factory = new XmlBeanFactory(r);
+	Resource resource = new ClassPathResource("applicationContext.xml");
+	BeanFactory factory = new XmlBeanFactory(resource);
 	Dao dao = (Dao)factory.getBean("d");
 	int PRETTY_PRINT_INDENT_FACTOR = 4;
 
