@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="hkperf" default="all">
+<project name="hkperf" basedir="." default="all">
   
   
-  <property file="hkperf.properties"/>
+  <property file="build.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
   <property name="skip.tests" value="true"/>
@@ -170,6 +170,8 @@
   
   <property name="hkperf.output.dir" value="${module.hkperf.basedir}/out/production/HKPerf"/>
   <property name="hkperf.testoutput.dir" value="${module.hkperf.basedir}/out/test/HKPerf"/>
+  <property name="hkperf.testoutput.dir" value="${module.hkperf.basedir}/out/test/HKPerf"/>
+
   
   <path id="hkperf.module.bootclasspath">
   </path>
@@ -246,7 +248,10 @@
       </fileset>
     </copy>
 
-	  <jar basedir="${hkperf.output.dir}"  destfile="${module.hkperf.basedir}/out/artifacts/HKPerf_jar/HKPerf.jar" manifest="${module.hkperf.basedir}/src/META-INF/MANIFEST.MF"></jar>
+	  <jar basedir="${hkperf.output.dir}" destfile="${module.hkperf.basedir}/out/artifacts/HKPerf_jar/HKPerf.jar"
+	  		     manifest="${module.hkperf.basedir}/src/META-INF/MANIFEST.MF"></jar>
+
+
   </target>
   
   <target name="compile.module.hkperf.tests" depends="register.custom.compilers,compile.module.hkperf.production" description="compile module HKPerf; test classes" unless="skip.tests"/>
@@ -263,6 +268,62 @@
   <target name="clean" depends="clean.module.hkperf" description="cleanup all"/>
   
   <target name="build.modules" depends="init, clean, compile.module.hkperf" description="build all modules"/>
-  
-  <target name="all" depends="build.modules" description="build all"/>
+
+	<target name="bulid.artifacts" depends="build.modules" description="build artifacts">
+
+		<copy todir="${module.hkperf.basedir}/out/artifacts/HKPerf_jar">
+			<fileset dir="${lib.commons.root}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+
+		<copy todir="${module.hkperf.basedir}/out/artifacts/HKPerf_jar">
+			<fileset dir="${lib.hibernate.root}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+
+		<copy todir="${module.hkperf.basedir}/out/artifacts/HKPerf_jar">
+			<fileset dir="${lib.json.root}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${module.hkperf.basedir}/out/artifacts/HKPerf_jar">
+			<fileset dir="${lib.logger.root}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${module.hkperf.basedir}/out/artifacts/HKPerf_jar">
+			<fileset dir="${lib.mysql.root}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${module.hkperf.basedir}/out/artifacts/HKPerf_jar">
+			<fileset dir="${lib.rest.root}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${module.hkperf.basedir}/out/artifacts/HKPerf_jar">
+			<fileset dir="${lib.spring.root}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${module.hkperf.basedir}/out/artifacts/HKPerf_jar">
+			<fileset dir="${lib.thirdParty.root}">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+
+		<jar basedir="${hkperf.output.dir}" destfile="${module.hkperf.basedir}/out/artifacts/HKPerf_jar/HKPerf.jar"
+		     manifest="${module.hkperf.basedir}/src/META-INF/MANIFEST.MF"></jar>
+
+	</target>
+	<target name="all" depends="bulid.artifacts" description="build all"/>
 </project>
