@@ -31,12 +31,8 @@ public class Dao {
 	public int  getRequestId(String testId) {
 		DetachedCriteria crit = DetachedCriteria.forClass(Response.class);
 		crit.add(Restrictions.eq("testId", testId));
-		List list2 = hibernateTemplate.findByCriteria(crit);
-
-		/*String query = "from Response as p where p.testId = :testId";
-				List list = hibernateTemplate.find(query, testId);*/
-
-		Response response = (Response)list2.get(0);
+		List list = hibernateTemplate.findByCriteria(crit);
+		Response response = (Response)list.get(0);
 		return  response.getId();
 	}
 	public int getWebSiteMappingId(String url){
