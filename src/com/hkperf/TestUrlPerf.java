@@ -35,7 +35,7 @@ public class TestUrlPerf {
 	ResponseViewType responseType = new ResponseViewType();
 	Resource resource = new ClassPathResource("applicationContext.xml");
 	BeanFactory factory = new XmlBeanFactory(resource);
-	Dao dao = (Dao)factory.getBean("d");
+	Dao dao = (Dao) factory.getBean("d");
 	int PRETTY_PRINT_INDENT_FACTOR = 4;
 
 	public static String HttpGet(String urlStr) throws IOException {
@@ -121,7 +121,6 @@ public class TestUrlPerf {
 			JSONObject responseData = jsonResponse.getJSONObject("data");
 
 			response.setStatus(jsonResponse.getInt("statusCode"));
-			/*response.setRuns(responseData.getInt("successfulRVRuns"));*/
 			response.setCreateDt(getCurrentDateTime());
 			response.setBwDown(responseData.getInt("bwDown"));
 			response.setBwUp(responseData.getInt("bwUp"));
@@ -140,24 +139,27 @@ public class TestUrlPerf {
 
 			JSONObject standardDeviationFirstViewDetails = responseData.getJSONObject("standardDeviation").getJSONObject("firstView");
 			JSONObject standardDeviationRepeatViewDetails = responseData.getJSONObject("standardDeviation").getJSONObject("repeatView");
+
+
+
 		/*1.'1' and '2' for median first and repeat view.
 		* 2.'3' and '4' for average first and repeat view.
 		* 3.'5' and '6' for standard deviation first and repeat view.*/
 
-
-			setResponseAndSaveDao(medianFirstViewDetails,testId,"1");
-			setResponseAndSaveDao(medianRepeatViewDetails,testId,"2");
-			setResponseAndSaveDao(averageRepeatViewDetails,testId,"4");
-			setResponseAndSaveDao(averageFirstViewDetails,testId,"3");
-			setResponseAndSaveDao(standardDeviationFirstViewDetails,testId,"5");
-			setResponseAndSaveDao(standardDeviationRepeatViewDetails,testId,"6");
+			setResponseAndSaveDao(medianFirstViewDetails, testId, "1");
+			setResponseAndSaveDao(medianRepeatViewDetails, testId, "2");
+			setResponseAndSaveDao(averageRepeatViewDetails, testId, "4");
+			setResponseAndSaveDao(averageFirstViewDetails, testId, "3");
+			setResponseAndSaveDao(standardDeviationFirstViewDetails, testId, "5");
+			setResponseAndSaveDao(standardDeviationRepeatViewDetails, testId, "6");
 
 		} catch (JSONException je) {
 			System.out.println(je.toString());
 
 		}
 	}
-	public void setResponseAndSaveDao(JSONObject viewTypeObject,String testId,String responseViewType)throws JSONException{
+
+	public void setResponseAndSaveDao(JSONObject viewTypeObject, String testId, String responseViewType) throws JSONException {
 		responseDetails.setRequestId(dao.getRequestId(testId));
 		responseDetails.setResponseViewType(responseViewType);
 		responseDetails.setLoadTime(viewTypeObject.getString("loadTime"));
@@ -167,11 +169,10 @@ public class TestUrlPerf {
 		responseDetails.setVisuallyCompleteDt(viewTypeObject.getString("VisuallyCompleteDT"));
 		responseDetails.setAdultSite(viewTypeObject.getString("adult_site"));
 		responseDetails.setAft(viewTypeObject.getString("aft"));
-		if(viewTypeObject.toString().contains("Avg")){
-		  responseDetails.setAvgRun(viewTypeObject.getString("avgRun"));
-		}
-		else
-		System.out.println("No Avg run in response");
+		if (viewTypeObject.toString().contains("Avg")) {
+			responseDetails.setAvgRun(viewTypeObject.getString("avgRun"));
+		} else
+			System.out.println("No Avg run in response");
 		responseDetails.setBasePageCdn(viewTypeObject.getString("base_page_cdn"));
 		responseDetails.setBrowserName(viewTypeObject.getString("browser_name"));
 		responseDetails.setBrowserVersion(viewTypeObject.getString("browser_version"));
@@ -246,22 +247,5 @@ public class TestUrlPerf {
 		} else return 0;
 
 	}
-
-	public int getViewType(String view) {
-		if (view.contains("medianFirst")) {
-			return 1;
-		} else if (view.contains("medianRepeat")) {
-			return 2;
-		} else if (view.contains("averageFirst")) {
-			return 3;
-		} else if (view.contains("averageRepeat")) {
-			return 4;
-		} else if (view.contains("standardDeviationFirst")) {
-			return 5;
-		} else if (view.contains("standardDeviationRepeat")) {
-			return 6;
-	}
-		else return 0;
-}
 
 }

@@ -3,7 +3,8 @@
   
   
   <property file="build.properties"/>
-  <property file="config.properties"/>
+  <property file="prod.properties"/>
+  <property file="${basedir}/environmentLocator.properties"/>
 
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
@@ -330,6 +331,13 @@
 		<jar basedir="${hkperf.output.dir}" destfile="${module.hkperf.basedir}/out/artifacts/HKPerf_jar/HKPerf.jar"
 		     manifest="${module.hkperf.basedir}/src/META-INF/MANIFEST.MF"></jar>
 
+
+
 	</target>
+    <target name="build.env.check">
+        <condition property="build.env.prod">
+            <equals arg1="${build.env}" arg2="prod" />
+        </condition>
+    </target>
 	<target name="all" depends="bulid.artifacts" description="build all"/>
 </project>

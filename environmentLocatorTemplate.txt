@@ -1,0 +1,7 @@
+
+
+build.env=prod
+
+dbpassword=root
+dbuser=root
+dburl=jdbc:mysql://localhost:3306/page_load_performance
