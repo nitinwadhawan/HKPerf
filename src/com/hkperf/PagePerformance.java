@@ -15,10 +15,10 @@ public class PagePerformance{
 
 	public static void main(String[] args) throws IOException, JSONException, InterruptedException, SQLException {
 		TestUrlPerf testUrlPerf= new TestUrlPerf();
-		testUrlPerf.testPerfomance(WWW_INFIBEAM_COM);
-		testUrlPerf.testPerfomance(WWW_HEALTHKART_COM);
-		testUrlPerf.testPerfomance(WWW_SNAPDEAL_COM);
-		testUrlPerf.testPerfomance(WWW_FLIPKART_COM);
+		testUrlPerf.testPerformance(WWW_INFIBEAM_COM);
+		testUrlPerf.testPerformance(WWW_HEALTHKART_COM);
+		testUrlPerf.testPerformance(WWW_SNAPDEAL_COM);
+		testUrlPerf.testPerformance(WWW_FLIPKART_COM);
 
 
 	}

@@ -28,7 +28,7 @@ import java.util.Date;
  */
 
 public class TestUrlPerf {
-	public String APIkey = "68503684ff22420497f60d22cfd2ce37";
+	private String APIkey = "68503684ff22420497f60d22cfd2ce37";
 	EnumUrl enumUrl = new EnumUrl();
 	Response response = new Response();
 	ResponseDetails responseDetails = new ResponseDetails();
@@ -38,7 +38,7 @@ public class TestUrlPerf {
 	Dao dao = (Dao) factory.getBean("d");
 	int PRETTY_PRINT_INDENT_FACTOR = 4;
 
-	public static String HttpGet(String urlStr) throws IOException {
+	public String httpGet(String urlStr) throws IOException {
 		URL url = new URL(urlStr);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -47,21 +47,21 @@ public class TestUrlPerf {
 		}
 
 		// Buffer the result into a string
-		BufferedReader rd = new BufferedReader(new InputStreamReader(
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
 				conn.getInputStream()));
-		StringBuilder sb = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder();
 		String line;
-		while ((line = rd.readLine()) != null) {
-			sb.append(line);
+		while ((line = bufferedReader.readLine()) != null) {
+			stringBuilder.append(line);
 		}
-		rd.close();
+		bufferedReader.close();
 
 		conn.disconnect();
-		return sb.toString();
+		return stringBuilder.toString();
 	}
 
-	public static void checkTestStatus(String testId) throws InterruptedException, IOException, JSONException {
-		String fetchTestStatus = HttpGet("http://www.webpagetest.org/testStatus.php?f=xml&test=" + testId + "&f=json");
+	public void checkTestStatus(String testId) throws InterruptedException, IOException, JSONException {
+		String fetchTestStatus = httpGet("http://www.webpagetest.org/testStatus.php?f=xml&test=" + testId + "&f=json");
 		JSONObject obj2 = new JSONObject(fetchTestStatus);
 		System.out.println("Status object" + obj2);
 		JSONObject getStatus = (JSONObject) obj2.get("data");
@@ -89,7 +89,7 @@ public class TestUrlPerf {
 		return todayDate;
 	}
 
-	public void testPerfomance(String url) throws IOException, JSONException, InterruptedException, SQLException {
+	public void testPerformance(String url) throws IOException, JSONException, InterruptedException, SQLException {
 		/*1.Initialize database_Response table to log number of outgoing requests and request time.
 		* 2.Submit test request to webpage test.
 		* 3.retrieve testId from first response.
@@ -99,18 +99,18 @@ public class TestUrlPerf {
 
 		response.setWebsiteId(dao.getWebSiteMappingId(url));
 		response.setCreateDt(getCurrentDateTime());
-		String firstResponse = HttpGet("http://www.webpagetest.org/runtest.php?url=" + url + "&k=" + APIkey + "&f=json");
+		String firstResponse = httpGet("http://www.webpagetest.org/runtest.php?url=" + url + "&k=" + APIkey + "&f=json");
 		JSONObject obj = new JSONObject(firstResponse);
 		System.out.println("First object :" + obj);
 		JSONObject data = (JSONObject) obj.get("data");
 		String testId = (String) data.get("testId");
 		response.setTestId(testId);
-		String fetchTestStatus = HttpGet("http://www.webpagetest.org/testStatus.php?f=xml&test=" + testId + "&f=json");
+		String fetchTestStatus = httpGet("http://www.webpagetest.org/testStatus.php?f=xml&test=" + testId + "&f=json");
 		System.out.println("Test Status: " + fetchTestStatus);
 		checkTestStatus(testId);
 		JSONObject obj2 = new JSONObject(fetchTestStatus);
 		JSONObject getStatus = (JSONObject) obj2.get("data");
-		String getXmlResult = HttpGet("http://www.webpagetest.org/xmlResult/" + testId + "/");
+		String getXmlResult = httpGet("http://www.webpagetest.org/xmlResult/" + testId + "/");
 		try {
 
 			JSONObject xmlJSONObj = XML.toJSONObject(getXmlResult);
@@ -244,7 +244,8 @@ public class TestUrlPerf {
 			return 7;
 		} else if (url.contains("amazon")) {
 			return 8;
-		} else return 0;
+		} else
+			return 0;
 
 	}
 
