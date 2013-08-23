@@ -140,6 +140,11 @@ public class TestUrlPerf {
 
 			JSONObject standardDeviationFirstViewDetails = responseData.getJSONObject("standardDeviation").getJSONObject("firstView");
 			JSONObject standardDeviationRepeatViewDetails = responseData.getJSONObject("standardDeviation").getJSONObject("repeatView");
+		/*1.'1' and '2' for median first and repeat view.
+		* 2.'3' and '4' for average first and repeat view.
+		* 3.'5' and '6' for standard deviation first and repeat view.*/
+
+
 			setResponseAndSaveDao(medianFirstViewDetails,testId,"1");
 			setResponseAndSaveDao(medianRepeatViewDetails,testId,"2");
 			setResponseAndSaveDao(averageRepeatViewDetails,testId,"4");
