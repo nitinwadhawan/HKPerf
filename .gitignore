@@ -16,7 +16,6 @@ bin-groovy/
 *.eml
 *.ids
 *.classpath
-*.project
 *.war
 Thumbs.db
 .idea
